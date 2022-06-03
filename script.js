@@ -1,6 +1,6 @@
 "use strict";
 
-let result = 60;
+let secretNumber = Math.floor(Math.random() * 100) + 1;
 let num;
 const game = function () {
   function input() {
@@ -24,20 +24,21 @@ const game = function () {
   input(num);
 
   const search = function (i) {
-    if (i == result) {
+    if (i == secretNumber) {
       alert("Поздравляю, Вы угадали!!!");
     } else {
-      if (i > result) {
+      if (i > secretNumber) {
         alert("Загаданное число меньше");
-        input(num);
+
+        game();
       } else {
-        if (i < result) {
+        if (i < secretNumber) {
           alert("Загаданное число больше");
-          input(num);
+
+          game();
         }
       }
     }
-    search(i);
   };
   search(num);
 };
