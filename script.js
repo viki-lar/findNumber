@@ -2,43 +2,43 @@
 
 let result = 60;
 let num;
-num = +prompt("Угадай число от 1 до 100");
-
-//проверка на число
-const checkNum = function (i) {
-  if (isNaN(i)) {
-    i = +prompt("Введи число!");
-    num = i;
-    checkNum(i);
+const game = function () {
+  function input() {
+    num = +prompt("Угадай число от 1 до 100");
+    checkNum(num);
   }
-};
-
-// //проверка на отмену
-const checkCancell = function (i) {
-  if (num === 0) {
-    alert("Игра окончена");
-  }
-};
-
-//проверка на равенство
-const search = function (i) {
-  if (i > result) {
-    alert("Загаданное число меньше");
-    i = +prompt("Введи другое число");
-  } else {
-    if (i < result) {
-      alert("Загаданное число больше");
-      i = +prompt("Введи другое число");
+  //проверка на число
+  const checkNum = function (i) {
+    if (isNaN(i)) {
+      i = +prompt("Введи число!");
+      num = i;
+      checkNum(i);
+      7;
     } else {
-      if (i == result) {
-        alert("Поздравляю, Вы угадали!!!");
+      // // //проверка на отмену
+      if (i === 0) {
+        alert("Игра окончена");
       }
     }
-  }
-  search(i);
-};
+  };
+  input(num);
 
-checkNum(num);
-checkCancell(num);
-search(num);
-console.log(num);
+  const search = function (i) {
+    if (i == result) {
+      alert("Поздравляю, Вы угадали!!!");
+    } else {
+      if (i > result) {
+        alert("Загаданное число меньше");
+        input(num);
+      } else {
+        if (i < result) {
+          alert("Загаданное число больше");
+          input(num);
+        }
+      }
+    }
+    search(i);
+  };
+  search(num);
+};
+game();
