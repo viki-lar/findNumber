@@ -1,7 +1,7 @@
 "use strict";
 
 const game = function () {
-  let secretNumber = Math.floor(Math.random() * 10) + 1;
+  let secretNumber = Math.floor(Math.random() * 100) + 1;
   let num;
   let attempt = 10;
   let begineMessage;
