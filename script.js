@@ -9,13 +9,13 @@ const game = function () {
 
   begineMessage = confirm("Хочешь сыграть в игру 'Угадай число?'");
 
-  if (attempt !== 1) {
-    if (begineMessage == true) {
+  if (begineMessage == true) {
+    if (attempt !== 1) {
       const round = function () {
         num = prompt("Введи число от 1 до 100");
 
         //проверка на отмену
-        if (num == null) {
+        if (num == null || num == 0) {
           alert("Игра окончена");
           game();
         }
@@ -27,7 +27,6 @@ const game = function () {
           round();
         } else {
           num = +num;
-          console.log(typeof num);
 
           //проверка на равенство
 
@@ -54,9 +53,9 @@ const game = function () {
         }
       };
       round();
+    } else {
+      alert("Попытки закончились, хотите сыграть еще?");
     }
-  } else {
-    alert("Попытки закончились, хотите сыграть еще?");
   }
 };
 
