@@ -1,58 +1,63 @@
 "use strict";
 
-let secretNumber = Math.floor(Math.random() * 100) + 1;
-let num;
-let attempt = 10;
-
-// описание функций
-
-//проверка на число
-const checkNum = function (userInput) {
-  if (isNaN(userInput)) {
-    userInput = +prompt("Введи число!");
-    num = userInput;
-    checkNum(userInput);
-  }
-  // // //проверка на отмену
-  if (userInput === 0) {
-    alert("Игра окончена");
-  }
-};
-
-//проверка на равенство
-const search = function (userNum) {
-  attempt--;
-  if (userNum == secretNumber) {
-    alert("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?");
-    attempt = 10;
-    game();
-  } else {
-    if (userNum > secretNumber) {
-      alert("Загаданное число меньше, осталось попыток" + " " + attempt);
-
-      game();
-    } else {
-      if (userNum < secretNumber) {
-        alert("Загаданное число больше,осталось попыток" + " " + attempt);
-
-        game();
-      }
-    }
-  }
-};
-
-// вызов функций
-
 const game = function () {
-  // ввод значения
-  num = +prompt("Угадай число от 1 до 100");
-  checkNum(num);
+  let secretNumber = Math.floor(Math.random() * 10) + 1;
+  let num;
+  let attempt = 10;
+  let begineMessage;
+  let answer;
 
-  //проверка на количество попыток
+  begineMessage = confirm("Хочешь сыграть в игру 'Угадай число?'");
+
   if (attempt !== 1) {
-    search(num);
+    if (begineMessage == true) {
+      const round = function () {
+        num = prompt("Введи число от 1 до 100");
+
+        //проверка на отмену
+        if (num == null) {
+          alert("Игра окончена");
+          game();
+        }
+
+        // проверка на число
+        if (isNaN(num)) {
+          num = alert("Введи число!");
+          console.log(num);
+          round();
+        } else {
+          num = +num;
+          console.log(typeof num);
+
+          //проверка на равенство
+
+          if (num == secretNumber) {
+            answer = confirm(
+              "Поздравляю, Вы угадали!!! Хотели бы сыграть еще?"
+            );
+            if (answer == true) {
+              game();
+            }
+          }
+
+          if (num > secretNumber) {
+            attempt--;
+            alert("Загаданное число меньше, осталось попыток" + " " + attempt);
+            round();
+          } else {
+            if (num < secretNumber) {
+              attempt--;
+              alert("Загаданное число больше,осталось попыток" + " " + attempt);
+              round();
+            }
+          }
+        }
+      };
+      round();
+    }
   } else {
     alert("Попытки закончились, хотите сыграть еще?");
   }
 };
+
 game();
