@@ -8,47 +8,47 @@ const game = function () {
   let answer;
 
   const round = function () {
-    num = prompt("Введи число от 1 до 100");
+    if (attempt != 0) {
+      num = prompt("Введи число от 1 до 100");
 
-    //проверка на отмену
-    if (num == null || num == 0) alert("Игра окончена");
-    else {
-      // проверка на число
-      if (isNaN(num)) {
-        alert("Введи число!");
-        round();
-      } else {
-        num = +num;
+      //проверка на отмену
+      if (num == null || num == 0) alert("Игра окончена");
+      else {
+        // проверка на число
+        if (isNaN(num)) {
+          alert("Введи число!");
+          round();
+        } else {
+          num = +num;
 
-        //проверка на равенство
+          //проверка на равенство
 
-        if (num == secretNumber) {
-          answer = confirm("Поздравляю, Вы угадали!!! Хотели бы сыграть еще?");
-          if (answer) {
-            game();
+          if (num == secretNumber) {
+            answer = confirm(
+              "Поздравляю, Вы угадали!!! Хотели бы сыграть еще?"
+            );
+            if (answer) {
+              game();
+            }
+          }
+
+          if (num > secretNumber) {
+            attempt--;
+            alert("Загаданное число меньше, осталось попыток" + " " + attempt);
+            round();
+          } else if (num < secretNumber) {
+            attempt--;
+            alert("Загаданное число больше,осталось попыток" + " " + attempt);
+            round();
           }
         }
-
-        if (num > secretNumber) {
-          alert("Загаданное число меньше, осталось попыток" + " " + attempt);
-        } else if (num < secretNumber) {
-          alert("Загаданное число больше,осталось попыток" + " " + attempt);
-        }
-        attempt--;
-        round();
       }
+    } else {
+      answer = confirm("Попытки закончились, хотите сыграть еще?");
     }
   };
 
-  begineMessage = confirm("Хочешь сыграть в игру 'Угадай число?'");
-
-  if (begineMessage) {
-    if (attempt > 1) {
-      round();
-    } else {
-      begineMessage = confirm("Попытки закончились, хотите сыграть еще?");
-    }
-  }
+  round();
 };
 
 game();
